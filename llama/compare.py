@@ -4,6 +4,7 @@ import time
 
 # Assuming Tokenizer and CKKS-related classes are correctly imported
 from tokenizer import Tokenizer
+
 from ckks.ckks_decryptor import CKKSDecryptor
 from ckks.ckks_encoder import CKKSEncoder
 from ckks.ckks_encryptor import CKKSEncryptor
@@ -60,6 +61,8 @@ def main():
     print("Token product (first 10 elements):", token_product[:10].tolist())
 
     # Initialize CKKS components
+    print("Encrypting data...")
+    start_time = time.time()
     poly_degree = 8192
     ciph_modulus = 1 << 60
     big_modulus = 1 << 1200
@@ -70,10 +73,11 @@ def main():
     encryptor = CKKSEncryptor(params, key_generator.public_key, key_generator.secret_key)
     decryptor = CKKSDecryptor(params, key_generator.secret_key)
     evaluator = CKKSEvaluator(params)
+    print("Done in {:.4f} seconds.".format(time.time() - start_time))
 
     # Encrypt, multiply, and decrypt
     start_time = time.time()
-    print("Encrypting data...")
+    
     output_1_list = output_1.flatten().tolist()
     output_2_list = output_2.flatten().tolist()
     plain_1 = encoder.encode(output_1_list, scaling_factor)
