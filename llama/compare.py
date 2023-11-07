@@ -51,7 +51,7 @@ def main():
     output_1 = output_1.view(-1)
     output_2 = output_2.view(-1)
 
-    length = 100
+    length = 4096
     output_1 = output_1[:length]
     output_2 = output_2[:length]
 
