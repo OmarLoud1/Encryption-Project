@@ -23,7 +23,7 @@ def tokenize_and_transform(tokenizer, model, sentence):
 
 if __name__ == "__main__":
     # Load the tokenizer and model
-    model_path = "/Users/omar/Documents/Research/llama/llama/tokenizer.model"
+    model_path = "tokenizer.model"
     tokenizer = Tokenizer(model_path=model_path)
     model = SimpleTransformerModel(tokenizer.n_words, 512, 8, 2)
 
