@@ -1,3 +1,4 @@
+import argparse
 import itertools
 import math
 
@@ -174,6 +175,11 @@ def parallel_matrix_multiply(matrix, message, keys, key_generator, scaling_facto
 
 
 def main():
+    parser = argparse.ArgumentParser(prog='Encrypted Matrix Multiplication', description='Encrypted Matrix Multiplication')
+    parser.add_argument("--block-size", help="block size", type=int, default=16)
+    args = parser.parse_args()
+
+
     # 128 with block 32, took 123 sec
     # 128 with block 16, took 115 sec
     # 128 with block 8, took 126 sec
@@ -186,7 +192,7 @@ def main():
     ciph_modulus = 1 << 600
     big_modulus = 1 << 1200
     scaling_factor = 1 << 30
-    block_size = 32  # side length
+    block_size = args.block_size  # side length
     matrix_size = 128  # side length
     poly_degree = 2 * block_size
     # poly_degree = 2 * matrix_size # if using lib_matrix_multiply instead of blocked
